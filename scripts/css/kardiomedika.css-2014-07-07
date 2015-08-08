@@ -1,0 +1,306 @@
+body {margin:0; font:14px  "Times New Roman", Times, serif;	color:#444751;  background:url(../../templates/images/bg_general.jpg) no-repeat center top #fff;}
+a{text-decoration:none; color:#9f367e;}
+a:link, a:visited {color:#5793bd;/* text-decoration:underline;*/}
+a:hover {text-decoration:underline; color:#5793bd;}
+
+aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display:block;}
+
+h1,h2,h3,h4,h5,h6 {font-weight:bold; font-family:'Times New Roman';}
+
+h1 {}
+h2 {font-size:30px; color:#9f367e;}
+h3 {font-size:20px; color:#2C2C52;}
+h4 {font-size:17px; color:#5d5d5d;}
+h5 {}
+h6 {}
+
+
+p {font-size:14px; line-height:150%; color:#5d5d5d;}
+ul {list-style:none; padding:0; margin:0;}
+a img {border:0;}
+
+.clearfix:after {content:"."; display:block; height:0; clear:both; visibility:hidden;}
+.clearfix {display:inline-block;}
+/* Hide from IE Mac \*/
+.clearfix {display:block;}
+/* End hide from IE Mac */
+
+/* GLOBAL */
+.wrap, body>header, .content {width:980px; margin:auto; position:relative;display:block;}
+#ajaxLoaderDialog {font-size:11px; text-align:center; width:100%; display:none;}
+
+/* HEADER */
+body>header {position:relative; height:214px;  background:url(../../templates/images/bg_header.jpg) repeat-x left #fff;}
+body>header h1 {text-indent:-9999px; overflow:hidden; outline:none; margin:0;}
+
+/*a#logo {outline:none; display:block; position:absolute; top:10px; left:10px; width:290px; height:136px; text-indent:-9999px; z-index:1; background:url(../../templates/images/logo-kardiomedika.jpg) no-repeat;}*/
+/*a#logo {outline:none; display:block; position:absolute; top:1px; left:10px; width:324px; height:161px; text-indent:-9999px; z-index:1; background:url(../../templates/images/kardio.jpg) no-repeat;}*/
+/*a#logo {outline:none; display:block; position:absolute; top:1px; left:10px; width:324px; height:161px; text-indent:-9999px; z-index:1; background:url(../../templates/images/kardio.png) no-repeat;}*/
+a#logo {outline:none; display:block; position:absolute; top:1px; left:10px; width:324px; height:161px; text-indent:-9999px; z-index:1; background:url(../../templates/images/kardio-no-shadow.png) no-repeat;}
+a#vitaphone {outline:none; display:block; position:absolute; top:20px; right:20px; width:610px; height:128px; text-indent:-9999px; z-index:1; background:url(../../templates/images/banner-kardiomedika.jpg) no-repeat;}
+
+.main-menu {background:none; height:80px; position:absolute; left:6px; top:170px;}
+.main-menu li {float:left; font-size:20px; border-right: 1px #fff solid;}
+.main-menu li:last-child{border:none;}
+.main-menu li a {display:block; padding:10px 18px; color:#fff; text-decoration:none;}
+.main-menu li a:hover {color:#a84689; background:url(../../templates/images/bg_menu_element_selected.jpg) repeat-x left;}
+.main-menu li.active {color:#a84689; background:url(../../templates/images/bg_menu_element_selected.jpg) repeat-x left;}
+.main-menu li.active a:link, .main-menu li.active a:visited {color:#a84689}
+
+/*CONTENT*/
+.content{background:url(../../templates/images/bg_content.png) no-repeat top; min-height:800px;}
+.content .subtop{background:url(../../templates/images/bg_subtop.png) no-repeat top; width: 980px; height:36px;}
+.content .subcontent{background:url(../../templates/images/bg_subcontent.png) repeat-y top center; width: 900px; min-height:600px; padding:10px 40px;}
+.content .subcontent .col_1{width:640px; min-height:600px; border-right:1px #d9d9d9 solid; float:left;padding:0 20px 20px 0;position:relative;}
+.content .subcontent .col_2{width:219px; min-height:600px; float:right; padding:0 0 20px 20px; position:relative;}
+.content .subcontent .col_2 h3{margin:5px 0; padding:0;}
+.content .subcontent .col_2 h4{margin:5px 0; padding:0;}
+
+/*PUSHER*/
+.push{padding:0 0 164px 0;}
+
+/* FOOTER */
+body>footer {background:url(../../templates/images/bg_footer.png) center top;margin-top:-164px; font-family:Arial, Helvetica, sans-serif;}
+body>footer .wrap {height:160px; padding-top:150px; background:url(../../templates/images/bg_footer_wrap.png) center top;}
+body>footer h3{font-family:Arial, Helvetica, sans-serif; font-size:20px; text-transform:uppercase; color:#fff;}
+
+.foot_info {position:absolute; bottom:10px; left:30px;}
+.foot_info li{float:left; padding: 0 10px 0 10px; border-right:1px #fff solid; line-height:12px; font-size:14px;}
+.foot_info ul li:first-child{padding-left: 0px;}
+.foot_info ul li:last-child{border:none;}
+.foot_info li a{color: #d4d4d4; text-decoration:none;}
+.foot_info a{color:#fff;}
+.foot_info address p{color:#fff; font-size:11px;}
+a#foot_logo {outline:none; display:block; position:absolute; bottom:5px; right:-10px; width:290px; height:136px; text-indent:-9999px; z-index:1; background:url(../../templates/images/logo-kardiomedika-small.jpg) no-repeat;}
+
+.foot_social {position:absolute; top:130px; left:25px;}
+.foot_social .social li{float:left;padding:0 5px;}
+.foot_social .social .socFB{outline:none; display:block; width:29px; height:29px; text-indent:-9999px; z-index:1; background:url(../../templates/images/icon-fb.png) no-repeat;}
+.foot_social .social .socTW{outline:none; display:block; width:29px; height:29px; text-indent:-9999px; z-index:1; background:url(../../templates/images/icon-tw.png) no-repeat;}
+.foot_social .social .socYT{outline:none; display:block; width:29px; height:29px; text-indent:-9999px; z-index:1; background:url(../../templates/images/icon-yt.png) no-repeat;}
+
+/* HOME PAGE */
+.sponsors{position:absolute; bottom:-10px; right:10px; z-index:1000;}
+.sponsors img{border:0px;}
+
+/*NEWS*/
+.event {border-bottom: 1px window solid; margin-bottom: 10px; padding-top: 10px;}
+.event .col-1{float:left; width: 220px;}
+.event .col-1 img {background-color:#EDA3D5; border:1px solid #EDA3D5; padding: 5px;}
+.event .col-2{float:left; width: 395px; padding:0 0 20px 20px;} 
+.event  h3{margin:0 0 10px 0; padding:0;}
+.event .more {float: right;}
+
+.event_table{width: 100%;}
+.event_table td.image_holder{width: 270px;}
+.event_table td.image_holder img {background-color:#EDA3D5; border:1px solid #EDA3D5; padding: 5px;}
+
+.event_table td.caption_holder{width: 400px; vertical-align: top;}
+.event_table td.caption_holder h2{padding:0; margin:0;}
+.event_table td.content_holder{width: 100%; padding: 20px 0 0 0;}
+
+
+
+#accordion ul{
+    list-style: none;
+    padding: 0 0 0 0;
+    width: 220px;
+}
+#accordion ul > li > a p{padding: 0px; margin: 0px;color:#fff; font-size:16px; line-height: 20px;}
+#accordion ul > li > a {
+    display: block;
+    /*background:url(../../templates/images/side_menu.jpg) top;*/
+    background-color:#3f426d;
+    font-weight: normal;
+    margin: 1px;
+    cursor: pointer;
+    padding: 5px 5px 5px 15px;
+color:#fff;
+font-size:16px;
+ 
+}
+#accordion ul > ul {
+    list-style: none;
+    padding: 0 0 0 0;
+}
+
+#accordion ul > li > ul{
+    display: none;
+	padding: 8px;
+}
+
+#accordion ul > li.current > ul{
+    display: block;
+}
+
+#accordion ul > ul > li {
+    font-weight: normal;
+    cursor: auto;
+    background-color: #fff;
+    padding: 20px 0 0 7px;
+}
+
+#accordion ul > li > ul a p{color: #000;
+	font-size: 15px; display: inline;}
+
+#accordion ul > li > ul a {
+    text-decoration: none;
+	display: block;
+    background: none;
+    font-weight: normal;
+    margin: 1px;
+    cursor: pointer;
+    padding: 5px 5px 5px 5px;
+	color: #000;
+	font-size: 15px;
+	list-style:	disc outside none;
+}
+#accordion ul > li > ul a:before
+{
+content: "\BB \ ";
+} 
+
+#accordion ul > li > ul a:hover {
+    text-decoration: underline;
+}
+
+/*content accordion*/
+#content_accordion ul{
+    list-style: none;
+    padding: 0 0 0 0;
+    width: 640px;
+}
+#content_accordion ul > li > h4 {
+    display: block;
+    background:url(../../templates/images/background_accordion.jpg) repeat top;
+    font-weight: normal;
+    margin: 1px;
+    cursor: pointer;
+    padding: 5px 5px 5px 15px;
+	color:#fff;
+	font-size:16px;
+ 
+}
+#content_accordion ul > ul {
+    list-style: none;
+    padding: 0 0 0 0;
+	margin: 0;
+	
+}
+
+#content_accordion ul > li > ul{
+    display: none;
+	padding: 5px 15px 5px 15px;
+	margin: 1px;
+	background-color: #F3F5F6;
+	width: 608px;
+}
+
+#content_accordion ul > li.current > ul{
+    display: block;
+}
+
+#content_accordion ul > ul > li {
+    font-weight: normal;
+    cursor: auto;
+    background-color: #fff;
+    padding: 8pxx;
+	width: 624px
+}
+
+#content_accordion ul > li > ul a {
+    text-decoration: none;
+	display: block;
+    background: none;
+    font-weight: normal;
+    margin: 1px;
+    cursor: pointer;
+    padding: 5px 5px 5px 5px;
+	color: #000;
+	font-size: 15px;
+	list-style:	disc outside none;
+}
+#content_accordion ul > li > ul a:before
+{
+content: "\BB \ ";
+} 
+
+#content_accordion ul > li > ul a:hover {
+    text-decoration: underline;
+}
+
+#content_accordion p{
+	padding: 0px;
+	margin: 5px 0;
+}
+
+
+/* SOME PAGEs */
+
+.acc_like_element{
+    list-style: none;
+    padding: 0 0 0 0;
+    width: 220px;
+}
+.acc_like_element a p{padding: 0px; margin: 0px;color:#fff; font-size:16px; line-height: 20px;}
+.acc_like_element a {
+    display: block;
+    /*background:url(../../templates/images/side_menu.jpg) top;*/
+background-color:#010184;
+    font-weight: normal;
+    margin: 1px;
+    cursor: pointer;
+    padding: 5px 5px 5px 15px;
+	color:#fff;
+	font-size:16px;
+ 
+}
+
+.sponsors_logos{margin: 30px 0 0 0; text-align: center; vertical-align: top;}
+
+/* NIMO SLIDER */
+.theme-default #slider {
+    margin:0 auto 50px auto;
+    width:630px; /* Make sure your images are the same size */
+    height:250px; /* Make sure your images are the same size */
+}
+
+/*FORMS ELEMENTS*/
+.bmi_table{border:1px #EBEBEB solid;}
+
+.input_field{border:1px #DB7DBD solid; margin: 3px; line-height: 18px; text-indent: 10px; font-size: 12px; padding: 3px;}
+.input_btn{background:url(../../templates/images/background_accordion.jpg) top; font-weight: bold; margin: 1px; cursor: pointer; padding: 4px;  color:#fff; 	font-size:16px; border: none;}
+.select_field{text-indent: 2px;}
+.blod_preasure{width:100%;}
+
+.blod_preasure input{width: 100px; border: 1px #ccc solid; font-size: 11px; line-height: 15px; padding: 2px; border:1px #DB7DBD solid;}
+.blod_preasure td{padding: 5px 5px 5px 2px;}
+.blod_preasure th{background-color: #C162A4; padding: 3px; color: white;}
+.blod_preasure .preasure, .blod_preasure .puls{width:50px;}
+.blod_preasure .hour{width:25px;}
+.blod_preasure .date{width:80px;}
+.blod_preasure .comment{width:145px;}
+.blod_preasure label{width:50px; display: block; float: left;}
+
+.contact-form table{width: 100%;}
+.contact-form table tr:hover{background-color: #EFF3F4;}
+.contact-form p{padding: 0; margin: 0;}
+.error_input{border: 1px red solid; background-color: #ffb2b2;}
+
+
+/*kontakt telefoni*/
+.phone_number{
+font-size:27px;
+font-weight:bold;
+}
+.phone_number span{
+display:inline-block;
+width:40px;
+text-align:right;
+
+margin-right:10px;
+font-size:16px;
+color:#9F367E;
+}
+
+

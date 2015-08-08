@@ -1,0 +1,30 @@
+
+.snippet1 {
+	width: auto;
+	margin: 0;
+	font-size: 14px;
+	font-weight: normal;
+}
+.snippet1 td {
+	padding: 5px 20px 10px 10px;
+	line-height: 25px;
+	vertical-align: top;
+	border-right: 1px solid #d2d2d2;
+}
+.snippet1 td a {
+	text-decoration: underline;
+}
+.snippet1 td.headline {
+	color: #fff;
+	background-color: #a7a5a6;
+	padding: 5px 20px 0 20px;
+	font-weight: bold;
+}
+.snippet1 td.sub {
+	background-color: #efefef;
+}
+.snippet1 td.not_ready {
+	border: none;
+	font-size: 10px;
+	color: #CCC;
+}

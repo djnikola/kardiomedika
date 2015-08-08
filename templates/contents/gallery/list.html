@@ -1,0 +1,45 @@
+<script type="text/javascript" src="scripts/java_scripts/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="scripts/java_scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="scripts/java_scripts/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<div class="wrap">
+<form name="gallery_list" action="index.php?section=gallery" method="post" enctype="multipart/form-data">
+<input type="hidden" name="data[page]" value="{[$PAGE]}" /> 
+
+              <h1>{[$labels.gallery]}</h1>
+
+              {[foreach from=$gallery_category_list item=category]} 
+              <!-- <h1 class="prominent_title">{[$category.name]}</h1> -->
+                    <div class="gallery_category_list">
+                    {[if $category.description]}
+                    	<div class="gallery_category_description">
+                    	{[$category.description]}
+                    	</div>
+                   	{[/if]}
+                    	{[foreach from=$category.galleries item=gallery]}
+                    	<div class="gallery_list"> 
+	                    	<a href="{[gallery_album_seo_url title=$gallery.name gallery_id=$gallery.gallery_id]}" >
+	                    	
+	                    	<span style="background-image:url({[$baseUrl]}{[$gallery.gallery_path]});">
+						
+							</span>
+	                    	</a>
+	                    	<span class="gallery_name">{[$gallery.name]}</span>
+                    	</div>
+                    	{[/foreach]}
+                    </div>
+                    <div style="clear:both; padding: 0 0 10px 0;"></div>
+              {[/foreach]}
+   
+		{[if isset($no_result)]}
+			<h5>{[$labels.no_results]}</h5>
+		{[/if]}
+		
+		{[if $PAGES > 1]}
+			<div class="paging" align="center">
+			<input type="button" value=" &#171; " ONCLICK="elements['data[page]'].value='{[$PREV]}';submit();" class="button_paging">&nbsp;&nbsp;
+			{[$labels.found]}: {[$TOTAL]},&nbsp;&nbsp; {[$labels.pages]} {[$PAGE]} {[$labels.of]} <span style="displ1ay: inline; clear: none; width: 23px; text-align: center;">{[$PAGES]}, {[$labels.with]} {[$PER_PAGE]} {[$labels.per_page]}</span>
+			&nbsp;&nbsp;<input type="button" value=" &#187; " ONCLICK="elements['data[page]'].value='{[$NEXT]}';submit();" class="button_paging">
+			</div>	
+		{[/if]}                    
+</form>
+</div>

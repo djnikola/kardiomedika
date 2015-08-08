@@ -1,0 +1,49 @@
+<script type="text/javascript" src="{[$baseUrl]}scripts/java_scripts/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="{[$baseUrl]}scripts/java_scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="{[$baseUrl]}scripts/java_scripts/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+
+<script type="text/javascript">
+$(document).ready(function() {
+    
+    /* Apply fancybox to multiple items */
+	$("a.grouped_elements").fancybox();    
+
+});
+</script>
+
+<form name="gallery_pictures_list" action="index.php?section=gallery&subsection=single_gallery&gallery_id={[$gallery_obj->gallery_id]}" method="post" enctype="multipart/form-data">
+<input type="hidden" name="data[page]" value="{[$PAGE]}" /> 
+
+              <h2>{[$gallery_obj->name]}</h2>
+              
+              	<p>
+					{[$gallery_obj->description]}
+				</p>
+              
+              {[foreach from=$gallery_obj->picture_arr item=picture]} 
+
+				<div class="gallery_picture_list">
+					<!-- <span class="gallery_picture_name">{[$picture->name|truncate:30:' ...']}</span> -->
+					<a href="{[$baseUrl]}{[$picture->path]}" class="grouped_elements" rel="test" caption="{[$picture->description|truncate:300:'']}" title="{[$picture->name]}"  author="Test" >
+
+                        <span style="background-image:url({[$baseUrl]}{[$picture->thumbnail_path]});">
+						
+						</span>
+					</a>	
+				</div>
+
+              {[/foreach]}
+              <div style="clear:both;"></div>
+   				
+		{[if isset($no_result)]}
+			<h5>{[$labels.no_result]}</h5>
+		{[/if]}
+		
+		{[if $PAGES > 1]}
+			<div class="paging" align="center">
+			<input type="button" value=" &#171; " ONCLICK="elements['data[page]'].value='{[$PREV]}';submit();" class="button_paging">&nbsp;&nbsp;
+			{[$labels.found]}: {[$TOTAL]},&nbsp;&nbsp; {[$labels.pages]} {[$PAGE]} {[$labels.of]} <span style="displ1ay: inline; clear: none; width: 23px; text-align: center;">{[$PAGES]}, {[$labels.with]} {[$PER_PAGE]} {[$labels.per_page]}</span>
+			&nbsp;&nbsp;<input type="button" value=" &#187; " ONCLICK="elements['data[page]'].value='{[$NEXT]}';submit();" class="button_paging">
+			</div>	
+		{[/if]}                    
+</form>

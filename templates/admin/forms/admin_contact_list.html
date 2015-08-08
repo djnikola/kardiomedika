@@ -1,0 +1,121 @@
+<script language="javascript">
+<!--
+function set_order(order) {
+  var f = document.forms['list_contacts'];
+  var o = f.elements['data[order]'];
+
+  if (o.value == order) {
+  	order = order.replace(/,/g,' desc,');
+    order = order + ' desc';
+  }
+
+  o.value = order;
+
+  f.elements['submit[filter]'].click();
+}
+
+
+//-->
+
+</script>
+<link rel="stylesheet" type="text/css" href="../scripts/css/dhtmlgoodies_calendar.css"/>
+<script type="text/javascript" src="../scripts/java_scripts/wz_tooltip.js"></script>
+<form name="list_contacts" action="index.php?section=forms&subsection=contact_list" method="post" enctype="multipart/form-data" class="forms">
+<input type="hidden" name="data[order]" value="{[$ORDER]}" >
+<h1>{[$labels.contact_list]}</h1>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" class="grid_table">
+    <tr class="table_header">
+        <td colspan="4">
+        Filter
+        </td>
+    </tr>
+	<tr>
+	<td id="input" ><label>{[$labels.contact_name]}:</label><br/>
+	<input type="text" name="filter[name]" value="{[$NAME]}" class="input_skin_1"/>
+	</td>
+	
+	<td id="input" ><label>{[$labels.contact_phone]}:</label><br/>
+	<input type="text" name="filter[phone]" value="{[$PHONE]}" class="input_skin_1"/>
+	</td>
+	<td id="input" ><label>Email: </label><br/>
+	<input type="text" name="filter[email]" value="{[$EMAIL]}" class="input_skin_1"/>
+	</td>
+	</tr>
+	
+	<tr>
+	<td id="input" ><label>{[$labels.contact_subject]}:</label> <br/>
+	<input type="text" name="filter[subject]" value="{[$SUBJECT]}" class="input_skin_1"/>
+	</td>
+	<td id="input"><label>{[$labels.contact_message]}:</label><br/>
+	<input type="text" name="filter[message]" value="{[$MESSAGE]}" class="input_skin_1"/>
+	</td>
+	<td  id="input" colspan="">
+		<input type="submit" name="submit[filter]" value="{[$labels.search]}" class="button_skin_1"></td>
+	</tr>
+	
+</table>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" class="grid_table">
+    <tr class="table_header">
+        <td colspan="4">
+        Kontakti
+        </td>
+    </tr>
+	<tr>
+		<th width="30%" align="left" class="right_border">
+		<a href="#" onClick="set_order('name');return false;" class="white_link">{[$labels.contact_name]}</a>
+		</th>
+		<th width="40%" align="left" class="right_border">
+		<a href="#" onClick="set_order('subject');return false;" class="white_link">{[$labels.contact_subject]}</a>
+		 / <a href="#" onClick="set_order('message');return false;" class="white_link">{[$labels.contact_message]}</a>
+		</th>
+		<th width="10%" align="left" class="right_border">
+		<a href="#" onClick="set_order('created');return false;" class="white_link">{[$labels.contact_created]}</a>
+		</th>
+		<th width="20%" align="center" nowrap="nowrap">
+		{[$labels.action]}
+		</th>
+	</tr>
+	{[foreach from=$contacts item=contact]}	
+	<tr class='{[cycle values="selected, noselected"]}'>
+		<td valign="top" >
+		<b style="font-size: 13px;">{[$contact.name]}</b> <br/>
+		<span style="font-size: 11px; color: black; font-weight: normal;"><b>{[$labels.contact_phone]} : </b>{[$contact.phone]}</span><br/>
+		<span style="font-size: 11px; color: black; font-weight: normal;"><b>{[$labels.contact_email]} : </b>{[$contact.email]}</span><br/>
+		<img src="../templates/images/admin/icons/icons/note.png" style="vertical-align: middle; padding: 2px; border: 0px;"  onmouseover="Tip('{[$contact.notice]}')" onmouseout="UnTip()"><br/>
+		
+		</td>
+
+		<td valign="top">
+		<span style="font-size: 11px; color: black; font-weight: normal;"><b>{[$labels.contact_subject]} : </b>{[$contact.subject]}</span><br/>
+		<span style="font-size: 11px; color: black; font-weight: normal;"><b>{[$labels.contact_message]} : </b><br/>{[$contact.message]}</span>
+		</td>
+		<td valign="middle" nowrap="nowrap">
+		{[$contact.created]}
+		</td>
+		<td align="center">
+		<a class="button_skin_1" href="index.php?section=forms&subsection=contact_new&contact_us_id={[$contact.contact_us_id]}">Pregledaj</a>
+		<a class="button_skin_1" href="index.php?section=forms&subsection=contact_delete&contact_us_id={[$contact.contact_us_id]}" 
+			onclick="return confirm('Da li ste sigurni?');">Obriši</a>
+		</td>
+	</tr>
+	{[/foreach]}
+	{[if isset($no_result)]}
+	<tr>
+		<td align="center" colspan="4">
+		{[$no_result]}
+		</td>
+	</tr>
+	{[/if]}
+	<tr>
+		<td class="paging"  align="center" height="25" colspan="6">
+			<input type="button" value=" &lt; " ONCLICK="elements['data[page]'].value='{[$PREV]}';submit();" class="button_paging">&nbsp;&nbsp;
+			{[$TOTAL]} {[$labels.found]},&nbsp;&nbsp; {[$labels.page]} <input type="text" size="3" value="{[$PAGE]}" name="data[page]" class="inputstyle" style="border: 0px; width: 23px;text-align: center;"> 
+			{[$labels.of]} <span style="displ1ay: inline; clear: none; width: 23px; text-align: center;">{[$PAGES]}, {[$labels.with]} {[$PER_PAGE]} {[$labels.per_page]}</span>
+			&nbsp;&nbsp;<input type="button" value=" &gt; " ONCLICK="elements['data[page]'].value='{[$NEXT]}';submit();" class="button_paging">
+		</td>
+	</tr>
+</table>
+
+</form>

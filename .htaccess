@@ -1,0 +1,26 @@
+RewriteEngine on
+#RewriteBase /
+# For security reasons, Option followsymlinks cannot be overridden.
+#Options +followSymlinks
+Options +SymLinksIfOwnerMatch
+DirectoryIndex index.php
+AddType application/x-httpd-php .html
+RewriteRule   ^([a-z]{2})/$	index.php?lang=$1 [QSA]	
+RewriteRule   ^([a-z]{2})/events/[a-zA-Z0-9_\ \-]*/([0-9]*)/$ index.php?section=articles&subsection=view&article_id=$2&articles_id=$2&lang=$1&page_id=5 [QSA]
+RewriteRule   ^([a-z]{2})/zakazivanje-pregleda-potvrda$     index.php?section=forms&subsection=contact_form_landing&lang=$1 [QSA]
+RewriteRule   ^([a-z]{2})/dnevnik-krvnog-pritiska-potvrda$     index.php?section=tests&subsection=bloode_presure_landing&lang=$1 [QSA]
+
+RewriteRule   ^([a-z]{2})/bmi-insert$     index.php?section=tests&subsection=add_bmi&lang=$1 [QSA]
+
+#RewriteRule   ^([a-z]{2})/media/([0-9]*)/$      index.php?section=media&page_id=$2&lang=$1 [QSA]	
+#RewriteRule   ^([a-z]{2})/page/[a-zA-Z_\ \-]*/([0-9]*)/$		index.php?section=pages&subsection=view&page_id=$2&lang=$1 [QSA]	
+
+#router section
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ router.php [NC,L]
+# File modified on Fri Mar 30 20:52:26 2012 by server
+# For security reasons, mod_php is not used on this server. Use a php.ini file for php directives
+# php_flag zend.ze1_compatibility_mode 0

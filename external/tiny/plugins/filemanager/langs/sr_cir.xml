@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language-pack>
+	<header>
+		<author>Логик д.о.о. Ниш</author>
+		<version minor="2" major="0" releasedate="2005-10-28" />
+		<description>
+			This is the Serbian Cyrillic language pack for the MCFileManager.
+		</description>
+	</header>
+
+	<language code="en" title="English" dir="ltr">
+		<group target="common">
+			<item name="exe">Извршна датотека</item>
+			<item name="image">Слика</item>
+			<item name="archive">Компримована архива</item>
+			<item name="html">HTML или Script</item>
+			<item name="movie">Видео датотека</item>
+			<item name="sound">Аудио датотека</item>
+			<item name="swf">Flash датотека</item>
+			<item name="powerpoint">Powerpoint датотека</item>
+			<item name="document">Датотека документа</item>
+			<item name="word">Office датотека</item>
+			<item name="pdf">Adobe acrobat датотека</item>
+			<item name="excel">Excel датотека</item>
+			<item name="txt">Текстуална датотека</item>
+			<item name="xml">XML датотека</item>
+		</group>
+
+		<group target="frameset">
+			<item name="title">UPLOAD центар</item>
+		</group>
+
+		<group target="filelist">
+			<item name="title">Moxiecode File Browser</item>
+			<item name="filename">Име датотеке</item>
+			<item name="size">Величина</item>
+			<item name="modified">Датум измена</item>
+			<item name="confirm_cut">Да ли сте сигурни да желите да преместите изабране датотеке?</item>
+			<item name="confirm_copy">Да ли сте сигурни да желите да копирате изабране датотеке?</item>
+			<item name="confirm_paste">Да ли сте сигурни да желите да преместите копиране датотеке овде?</item>
+			<item name="confirm_delete">Да ли сте сигурни да желите да обришете изабране датотеке?</item>
+			<item name="confirm_unzip">Да ли сте сигурни да желите да отпакујете изабране датотеке?\nМоже потрајати ако су фајлови велики.</item>
+			<item name="zip_removed">Следећи фајлови су избачени јер нису зип фајлови.</item>
+			<item name="createdir">Креирај директоријум</item>
+			<item name="createdoc">Креирај фајл</item>
+			<item name="refresh">Освежи</item>
+			<item name="upload">Пренеси нови фајл</item>
+			<item name="download">Преузми фајл</item>
+			<item name="props">Карактеристике фајла/директоријума</item>
+			<item name="cut">Премести изабране фајлове/директоријуме</item>
+			<item name="copy">Копирај изабране фајлове/директоријуме</item>
+			<item name="paste">Налепи изабране фајлове/директоријуме</item>
+			<item name="delete">Обриши изабране фајлове/директоријуме</item>
+			<item name="unzip">Распакуј изабрани фајл</item>
+			<item name="zip">Запакуј изабране фајлове</item>
+			<item name="imagemanager">Пребаци у Image Manager</item>
+			<item name="dir">Директоријум</item>
+			<item name="parent_dir">Наддиректоријум</item>
+			<item name="toggle_all">Измени све</item>
+			<item name="error_exists">Грешка: Фајл/директоријум {path} већ постоји.</item>
+			<item name="error_delete_failed">Грешка: Немате привилегије да бришете фајл/директоријум.</item>
+			<item name="error_directory_not_empty">Грешка: Директоријум {path} не може бити обрисан јер није празан.</item>
+		</group>
+
+		<group target="preview">
+			<item name="title">Датотека / Директоријум информације</item>
+			<item name="directory_information">Директоријум информације</item>
+			<item name="file_information">Датотека information</item>
+			<item name="creationdate">Датум креирања:</item>
+			<item name="modificationdate">Датум измене:</item>
+			<item name="access">Приступ:</item>
+			<item name="directory">Директоријум:</item>
+			<item name="subdirectories">Поддиректоријуми:</item>
+			<item name="files">Датотеке:</item>
+			<item name="total_file_size">Укупна величина:</item>
+			<item name="filename">Име датотеке:</item>
+			<item name="file_size">Величина датотеке:</item>
+			<item name="file_description">Опис датотеке:</item>
+			<item name="preview">Приказ</item>
+			<item name="no_preview">Приказ није доступан.</item>
+			<item name="button_select">Изабери</item>
+			<item name="button_view">Прикажи</item>
+			<item name="readable">Могуће читање</item>
+			<item name="not_readable">Немогуће читање</item>
+			<item name="writable">Могуће писање</item>
+			<item name="not_writable">Немогуће писање</item>
+		</group>
+
+		<group target="fileprops">
+			<item name="title">Датотека / Директоријум карактеристике</item>
+			<item name="description">Датотека / Директоријум карактеристике</item>
+			<item name="properties_on">карактеристике:</item>
+			<item name="name">Име:</item>
+			<item name="button_save">Сними</item>
+			<item name="button_cancel">Откажи</item>
+			<item name="error_exists">Грешка: Фајл/директоријум са истим именом већ постоји.</item>
+		</group>
+
+		<group target="createdir">
+			<item name="title">Креирај директоријум</item>
+			<item name="description">Унеси име директоријума.</item>
+			<item name="template">Шаблон:</item>
+			<item name="select_template">-- Изабери шаблон --</item>
+			<item name="directory_name">Име директоријума:</item>
+			<item name="create_in">Креирај у:</item>
+			<item name="button_create">Креирај</item>
+			<item name="button_cancel">Откажи</item>
+			<item name="error_missing_name">Грешка: Морате задати име.</item>
+			<item name="error_invalid_template_selection">Грешка: Морате задати шаблон.</item>
+			<item name="error_template_not_found">Грешка: Изабрани шаблон не постоји.</item>
+			<item name="error_invalid_name">Грешка: Име директоријума није исправно.\\nИма погрешне карактере као: :;</item>
+			<item name="error_exists">Грешка: Директоријум са истим именом већ постоји.</item>
+		</group>
+
+		<group target="createdoc">
+			<item name="title">Креирај документ</item>
+			<item name="description">Попуните форму да направите документ.</item>
+			<item name="template">Шаблон:</item>
+			<item name="select_template">-- Изабери шаблон --</item>
+			<item name="required_filename">Морате задати име датотеке.</item>
+			<item name="filename">Име датотеке:</item>
+			<item name="create_in">Креирај у:</item>
+			<item name="button_create">Креирај</item>
+			<item name="button_cancel">Откажи</item>
+			<item name="error_missing_document_name">Грешка: Морате задати име.</item>
+			<item name="error_missing_template_selection">Грешка: Морате задати шаблон.</item>
+			<item name="error_missing_template">Грешка: Изабрани шаблон не постоји.</item>
+			<item name="error_invalid_file_name">Грешка: Име датотеке није исправно.\\nИма погрешне карактере као: :;</item>
+			<item name="error_exists">Грешка: Датотека са истим именом већ постоји.</item>
+		</group>
+
+		<group target="upload">
+			<item name="title">Пренеси</item>
+			<item name="description">Користите форму да пренесете датотеке.</item>
+			<item name="upload_in">Пренеси у:</item>
+			<item name="valid_extensions">Исправне екстензије:</item>
+			<item name="max_upload_size">Максимална величина:</item>
+			<item name="file_to_upload">Датотека за пренос:</item>
+			<item name="as_file_name">Под именом:</item>
+			<item name="required_filename">Морате задати име датотеке.</item>
+			<item name="button_upload">Пренос</item>
+			<item name="button_add_upload">Још датотека</item>
+			<item name="button_cancel">Откажи</item>
+			<item name="error_exists">Грешка: Датотека већ постоји</item>
+			<item name="error_to_large">Грешка: Датотека је сувише велика</item>
+			<item name="remove">Избаци</item>
+		</group>
+
+		<group target="unzip">
+			<item name="title">Преглед отпакивања</item>
+			<item name="description">Преглед zip изабраних зип датотека.</item>
+			<item name="zipfile_name">Име датотеке:</item>
+			<item name="current_folder">Текући директоријум:</item>
+			<item name="overwrite_files">Пресними датотеке:</item>
+			<item name="name">Име</item>
+			<item name="size">Величина</item>
+			<item name="csize">CSize</item>
+			<item name="exists">Постоји</item>
+			<item name="status">Статус</item>
+			<item name="created">Креиран</item>
+			<item name="button_unzip">Отпакуј</item>
+			<item name="button_cancel">Откажи</item>
+			<item name="button_back">Назад</item>
+			<item name="button_close">Затвори</item>
+			<item name="Accepted">Прихваћен</item>
+			<item name="Denied">Одбијен</item>
+			<item name="Passed">Прошао</item>
+			<item name="Failed">Неуспешан</item>
+			<item name="Yes">Да</item>
+			<item name="No">Не</item>
+		</group>
+
+		<group target="zip">
+			<item name="title">Креирај зип архиву</item>
+			<item name="description">Задајте име зип архиве.</item>
+			<item name="created_in">Zip ће бити креиран у:</item>
+			<item name="name">Име:</item>
+			<item name="required_filename">Морате задати име.</item>
+			<item name="button_create">Креирај</item>
+			<item name="button_cancel">Откажи</item>
+		</group>
+	</language>
+</language-pack>

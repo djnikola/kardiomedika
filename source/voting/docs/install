@@ -1,0 +1,4 @@
+Create symbolic link in libs:
+
+    cd /source/voting/libs/
+    ln -s ../../../external/phpmailer phpmailer;

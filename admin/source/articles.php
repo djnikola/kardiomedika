@@ -1,0 +1,233 @@
+<?php
+switch ($subsection){
+	
+	case "new": 
+		$submit = &$_REQUEST['submit'];
+		$data = &$_REQUEST['data'];
+		$articles_id = &$_REQUEST['articles_id'];
+		
+                
+		$landing_marker = '';
+		$file_config = array(
+		"root_dir" => BASE_PATH,
+		"upload_dir" => "uploads/articles",
+		"input_file" => "image",
+		"error_name" => "image_error",
+		"max_size" => "200000",
+		"extensions" => "jpg",
+		"tmp_dir" => "tmp_uploads",
+		"input_file_path" => "image_path",
+		"input_file_name" => "image_name",
+		"thumbnail_sizes" => "articles_thumbnails",
+		);
+		
+		$articles_obj = new Articles();
+		
+			if(isset($articles_id) && $articles_id > 0){
+					$articles_obj->articles_id = $articles_id;
+					$articles_obj->get();	
+			}
+			if(@$submit['save']){
+				$errors = array();
+
+				if(empty($data['caption'])) $errors['caption'] = "Please enter Title";
+				if(empty($data['articles_type'])) $errors['articles_type'] = "Please select type";
+				//if(empty($data['content'])) $errors['content'] = "Please enter Content";
+				if($_FILES[$file_config['input_file']])	@upload_save_tmp($data, $file_config, $errors);
+					$articles_obj->content = $data['content'];
+					$articles_obj->is_active = $data['is_active'];
+					$articles_obj->location = $data['location'];
+                                        $articles_obj->highlights = $data['highlights'];
+					$articles_obj->caption = $data['caption'];
+					$articles_obj->articles_type = $data['articles_type'];
+					$articles_obj->publish_date = date_converter_from_serbian_format($data['publish_date']);
+		
+				if(!count($errors)){
+					// ako nema gresaka snimi ili update
+					if($articles_id){
+                        
+					#Delete old picture
+					if(!empty($_FILES[$file_config['input_file']]['name'])){
+                        
+						$picture_path = $articles_obj->image;
+						@unlink(BASE_PATH . $picture_path);
+						@remove_thumbnails(BASE_PATH . $picture_path, $config['articles_thumbnails']);
+						$articles_obj->image = '';
+						
+						if(!empty($_FILES[$file_config['input_file']]['name'])){
+							#New picture
+							$picture_path = @upload_save($data, $file_config, $articles_obj->articles_id);
+							$articles_obj->image = $picture_path; 
+						}
+					}
+		
+					$articles_obj->update();
+					$articles_obj->get();
+					_redirect("index.php?section=articles&subsection=list");
+					}else{
+						$articles_id = $articles_obj->add();
+						$articles_obj->articles_id = $articles_id; 
+							#New picture
+							$picture_path = @upload_save($data, $file_config, $articles_id);
+							$articles_obj->image = $picture_path;
+							$articles_id = $articles_obj->update();
+						$articles_obj->get();
+						_redirect("index.php?section=articles&subsection=list");
+					}
+				}else{
+					// ako ima gresaka vrati izmenjene podatke u html
+					$_SESSION['ERRORS'] = $errors;
+				}
+			}
+
+		$smarty->assign('image', $articles_obj->image);
+		$smarty->assign('image_name', $data['image_name']);     
+        $smarty->assign('article', $articles_obj);
+        
+		#======================================================	
+        
+		$show_articles_type_options = array(
+                    'news' => $labels['news'], 'nutrition' => $labels['nutrition'], 'interesting' => $labels['interesting'], 'risk_factors' => $labels['risk_factors']
+                );
+		$dropdown_articles_type = '';
+		foreach($show_articles_type_options as $value =>$label){
+			$selected = $value == $articles_obj->articles_type ? 'selected=selected':'';
+			$dropdown_articles_type .= '<option value='.$value.' '.$selected.'>'.$label.'</option>\n'; 
+		}
+		$smarty->assign("dropdown_articles_type", $dropdown_articles_type);
+		#======================================================	
+		#======================================================	
+		$is_active_options = array('yes'=>'Yes', 'no'=>'No');
+		$labels = array('yes' => '' . $labels['yes'] . '', 'no' => '' . $labels['no'] . '');
+		$dropdown_is_active = '';
+		foreach($is_active_options as $value =>$label){
+			$selected = $value == $articles_obj->is_active ? 'selected=selected':''; 
+			$dropdown_is_active .= '<option value='.$value.' '.$selected.'>'.$labels[strtolower($label)].'</option>\n'; 
+		}
+		$smarty->assign("dropdown_is_active", $dropdown_is_active);
+		#======================================================
+		$template = "admin/articles/new.tpl";
+		if(@$submit['cancel']){
+		    _redirect("index.php?section=articles&subsection=list");
+		}
+	break;
+	
+	case "delete":
+		$articles_obj = new Articles($_REQUEST['articles_id']);
+		$articles_obj->get();
+		$picture_path = $articles_obj->image;
+		@unlink(BASE_PATH . $picture_path);
+		@remove_thumbnails(BASE_PATH . $picture_path, $config['articles_thumbnails']);
+		$articles_obj->delete();
+        _redirect("index.php?section=articles&subsection=list");
+	break;
+		
+	case "list":
+    default:
+    saveReturnPoint();
+	$articles_obj = new Articles();
+	$data = &$_REQUEST['data'];
+	$filter = &$_REQUEST['filter'];
+	
+	#searching conditions
+	#--------------------------------------------------------------------	
+
+	//date transformation	
+	$smarty->assign(array(  "CAPTION_PART" => "$filter[caption_part]",  
+  					   		"PUBLISH_DATE_FROM" => "$filter[publish_date_from]", 
+  					   		"PUBLISH_DATE_TO" => "$filter[publish_date_to]", 
+	
+	));
+
+	$where = array();
+	echo $filter['articles_type'];
+	if ($filter['caption_part']) $where[] = "at.caption like '%".addslashes($filter['caption_part'])."%'";
+	if ($filter['is_active']) $where[] = "a.is_active = '".$filter['is_active']."'";
+	if ($filter['articles_type']) $where[] = "a.articles_type = '".$filter['articles_type']."'";
+	if ($filter['publish_date_from']) $where[] = "a.publish_date > '".date_converter_from_serbian_format($filter['publish_date_from'])."'";
+	if ($filter['publish_date_to']) $where[] = "a.publish_date < '".date_converter_from_serbian_format($filter['publish_date_to'])."'";
+
+	if(count($where)){
+		$where ="WHERE ".join(" and \n",$where);
+	} else {
+        $where = "";
+	}
+        
+	#------------------------------------------------------------------------------
+
+ //order by generation
+	  
+    if (@$data['order'] == ''){
+        $data['order'] = "a.articles_id desc";
+    }
+    $smarty->assign("ORDER", $data['order']);
+    if (@$data['page'] == ''){
+        $data['page'] = 0;
+    }
+  $order_by = "ORDER BY ".$data['order']."";
+
+  //paging
+    $result=mysql_query("SELECT count(*) FROM articles AS a INNER JOIN articles_trans as at ON at.fk_articles_id = a.articles_id $where");
+//	echo "<p> count error = ".mysql_error();
+//    echo "SELECT count(*) FROM articles AS a $where";
+  if ($result && mysql_num_rows($result)) { 
+    $total = mysql_result($result,0,0);	
+    $per_page = 10;
+    $pages = ceil($total / $per_page);
+    if ($data['page'] > $pages)
+      $data['page'] = $pages;
+    if ($data['page'] <= 0) 
+      $data['page'] = 1;
+    $limit_sql = "LIMIT ".($data['page']-1)*$per_page.",$per_page";
+  }
+
+  $smarty->assign(array("TOTAL"  => "$total",
+                     "PAGES"  => "$pages",
+                     "PAGE"   => "$data[page]",
+                     "NEXT"   => $data['page']+1,
+                     "PREV"   => $data['page']-1,
+                     "PER_PAGE" => $per_page,
+  ));
+		
+		
+		$all_articles = array();
+		$for_output = array();
+
+		$all_articles = $articles_obj->get_all_articles_admin($where, $limit_sql, $order_by);
+		//dumper($all_articles);exit;
+		if($all_articles){
+			foreach ($all_articles as $new){
+				$new['is_active'] = $new['is_active'] == 'yes' ? $labels['yes']:$labels['no'] ;
+				$new['articles_type'] = $labels['' .$new['articles_type']. ''] ;
+				$for_output[] = $new;
+			}
+		}else{
+			$smarty->assign("no_result",$labels['no_results']);
+		}
+		#======================================================	
+		$show_articles_type_options = array(
+                    'news' => $labels['news'], 'nutrition' => $labels['nutrition'], 'interesting' => $labels['interesting'], 'risk_factors' => $labels['risk_factors']
+                );
+		$dropdown_articles_type = '';
+		foreach($show_articles_type_options as $value =>$label){
+			$selected = $value == $filter['articles_type'] ? 'selected=selected':'';
+			$dropdown_articles_type .= '<option value='.$value.' '.$selected.'>'.$label.'</option>\n'; 
+		}
+		$smarty->assign("dropdown_articles_type", $dropdown_articles_type);
+		#======================================================	
+		#======================================================	
+		$labels = array('yes' => ''.$labels['yes'].'', 'no' => ''.$labels['no'].'');
+		$is_active_options = array('yes'=>$labels['yes'], 'no'=>$labels['no']);
+		$dropdown_is_active = '';
+		foreach($is_active_options as $value =>$label){
+			$selected = $value == $filter['is_active'] ? 'selected=selected':'';
+			$dropdown_is_active .= '<option value='.$value.' '.$selected.'>'.$label.'</option>\n'; 
+		}
+		$smarty->assign("dropdown_is_active", $dropdown_is_active);
+		#======================================================	
+		$smarty->assign('admin_articles_list', $for_output);
+        $template = "admin/articles/list.tpl";
+
+        break;
+}
+?>

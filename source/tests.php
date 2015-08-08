@@ -1,0 +1,140 @@
+<?php
+$meta = array(
+		'title'=>'',
+		'keywords'=>'',
+		'description'=>'',
+		);
+$right = '';
+$left = 'user_login|news_list';
+$dinamicInclude = 'dinamic_include';
+switch ($subsection){
+
+	case "blood-presure-submit":
+		$ERRORS = array();
+		$data = &$_REQUEST['data'];
+		$messure = &$_REQUEST['messure'];
+		$submit = &$_REQUEST['submit'];
+		$landing_marker = '';
+		if(!$_REQUEST['data']){
+			$data = array();
+			$data['first_name'] = '';
+			$data['last_name'] = '';
+			$data['birth_year'] = '';
+			$data['phone'] = '';
+			$data['email'] = '';
+		}
+		if(!$_REQUEST['messure']){
+			$messure = array();
+			for ($i = 1; $i <=7; $i++) {
+				$messure[$i]['day'] = "";
+				$messure[$i]['morning_time'] = "";
+				$messure[$i]['morning_upper'] = "";
+				$messure[$i]['morning_down'] = "";
+				$messure[$i]['morning_puls'] = "";
+				$messure[$i]['morning_comments'] = "";
+				$messure[$i]['afternoon_time'] = "";
+				$messure[$i]['afternoon_upper'] = "";
+				$messure[$i]['afternoon_down'] = "";
+				$messure[$i]['afternoon_puls'] = "";
+				$messure[$i]['afternoon_comments'] = "";
+				$messure[$i]['evening_time'] = "";
+				$messure[$i]['evening_upper'] = "";
+				$messure[$i]['evening_down'] = "";
+				$messure[$i]['evening_puls'] = "";
+				$messure[$i]['evening_comments'] = "";
+			}
+		}
+
+		$errors = array();
+		if(empty($data['first_name'])) $errors['first_name'] = 1;
+		if(empty($data['last_name'])) $errors['last_name'] = 1;
+		if(empty($data['birth_year'])) $errors['birth_year'] = 1;
+		if(empty($data['phone'])) $errors['phone'] = 1;
+		foreach($data as $k => $v){
+			$smarty->assign(''.$k.'', $v);
+		}
+		$smarty->assign('messure', $messure);
+		//check errors only morning and evening values will be inserted.
+		$allInsertEmpty = true;
+//		foreach( $messure as $k => $v) {
+//			foreach(array("morning", "evening") as $period) {
+//				if (empty($v[$period.'_time']) 
+//					&& empty($v[$period.'_upper']) 
+//					&& (empty($v[$period.'_down'])) 
+//					&& (empty($v[$period.'_puls'])) ) {
+//						;
+//					}
+//			}
+//		}
+
+		if($submit['send']){
+			if(!count($errors)){
+				$smarty->assign("avg_upper", BloodPresureDairy::calculateAvg('upper', $messure));		
+				$smarty->assign("avg_down", BloodPresureDairy::calculateAvg('down', $messure));
+				$smarty->assign("avg_puls", BloodPresureDairy::calculateAvg('puls', $messure));
+		
+				$blood_presure_result_html = $smarty->fetch("contents/tests/blood_presure_email.tpl");
+				$bpd_obj = new BloodPresureDairy(0,
+					$data['first_name'],
+					$data['last_name'],
+					$data['birth_year'],
+					$data['phone'],
+					$data['email'],
+					$blood_presure_result_html
+				);
+				$bpd_obj->add();
+				$fromEmail = (isset($data['email']) && $data['email'] != "") ? $data['email'] : "";
+				
+				#Send email 
+				$headers  = "MIME-Version: 1.0\n";
+				$headers .= "Content-type: text/html; charset=utf-8";
+				send_email($config['blood_presure_mail']. ";"."drdmijalkovic@gmail.com;"."djnikola1978@gmail.com;", 
+					"Dnevnik pritiska sa web sajta: ".$data['last_name']. " ".$data['first_name']. " ".$data['birth_year'], $blood_presure_result_html, $fromEmail, $headers, "", $ERRORS);
+				$landing_marker = "saved";
+			}else{
+				$smarty->assign("errors", $errors);
+			}
+		}
+		
+		
+		$sql_meta = "SELECT * FROM page_trans WHERE permalink = 'dnevnik-krvnog-pritiska' AND lang='".$_SESSION['lang']."'";
+		$res_meta = mysql_query($sql_meta);
+		$meta_tags = mysql_fetch_array($res_meta, MYSQL_ASSOC);
+		
+		$meta['title'] = $meta_tags['meta_title'];
+		$meta['keywords'] = $meta_tags['meta_keywords'];
+		$meta['description'] = $meta_tags['meta_description'];
+		
+		if($landing_marker == "saved"){
+			header("Location: ".$baseUrl."sr/dnevnik-krvnog-pritiska-potvrda");
+		}
+        else{
+        	$template = "tests/blood-presure.tpl";
+        }
+		break;
+	case "bloode_presure_landing":
+		$template = "tests/blood_presure_landing.tpl";
+	break; 
+	
+	case "bmi":
+		$template = "tests/bmi.tpl";
+		break;
+	case "add_bmi":
+		$type = $_REQUEST['type'];
+		$bmi = new Bmi(0, $type);
+		$bmi->add();
+		echo json_encode($bmi->get_result());
+		//$template = "../ajax.tpl";
+		exit;
+		break;
+		
+	case "bm":
+		$template = "tests/bm.tpl";
+		break;
+
+	default:
+		$template = "tests/bmi.tpl";
+		break;
+		
+}
+?>
